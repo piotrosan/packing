@@ -23,9 +23,9 @@ def check_up_9_18(order_amount):
         }
     if order_amount > 12 and order_amount <= 18:
         return {
-            "big_box": 0,
+            "big_box": 2,
             "medium_box": 0,
-            "small_box": 2,
+            "small_box": 0,
             "wrapper_box": 1
         }
 

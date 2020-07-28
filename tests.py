@@ -5,27 +5,54 @@ from packing import check_integer_amount
 from packing import check_mod_amount
 from packing import check_up_to_ten
 from packing import do_if_big
+from packing import check_up_9_18
+from packing import wrapper_box
 
 
 class TryPacking(unittest.TestCase):
+
+    def test_check_up_9_18(self):
+        result = check_up_9_18(10)
+        assert result["big_box"] == 0
+        assert result["medium_box"] == 2
+        assert result["small_box"] == 0
+        assert result["wrapper_box"] == 1
+
+    def test_check_up_9_18(self):
+        result = check_up_9_18(14)
+        assert result["big_box"] == 2
+        assert result["medium_box"] == 0
+        assert result["small_box"] == 0
+        assert result["wrapper_box"] == 1
+
+    def test_wrapper_box_3(self):
+        result = wrapper_box(3)
+        assert result == 1
+
+    def test_wrapper_box_5(self):
+        result = wrapper_box(5)
+        assert result == 2
 
     def test_packing_order_100(self):
         result = packing_order(100)
         assert result["big_box"] == 11
         assert result["medium_box"] == 0
         assert result["small_box"] == 1
+        assert result["wrapper_box"] == 4
 
     def test_packing_order_10(self):
         result = packing_order(10)
-        assert result["big_box"] == 1
-        assert result["medium_box"] == 0
-        assert result["small_box"] == 1
+        assert result["big_box"] == 0
+        assert result["medium_box"] == 2
+        assert result["small_box"] == 0
+        assert result["wrapper_box"] == 1
 
     def test_packing_order_22(self):
         result = packing_order(22)
         assert result["big_box"] == 2
         assert result["medium_box"] == 1
         assert result["small_box"] == 0
+        assert result["wrapper_box"] == 1
 
     def test_check_integer_amount_22(self):
         result = check_integer_amount(22)
@@ -62,7 +89,7 @@ class TryPacking(unittest.TestCase):
         assert result["big_box"] == 11
         assert result["medium_box"] == 0
         assert result["small_box"] == 1
-
+        assert result["wrapper_box"] == 4
 
 if __name__ == '__main__':
     unittest.main()
